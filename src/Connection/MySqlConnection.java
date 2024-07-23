@@ -1,11 +1,14 @@
 package Connection;
 
-
-
 import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-public class DbConnection {
+public class MySqlConnection {
+
+    public PreparedStatement ps;
+    public ResultSet rs;
 
     public Connection connection() {
         Connection con = null;

@@ -1,5 +1,8 @@
-
 package Popup;
+
+import Controller.CategoryController;
+import Model.CategoryModel;
+import javax.swing.JOptionPane;
 
 public class AddCategory extends javax.swing.JFrame {
 
@@ -52,6 +55,11 @@ public class AddCategory extends javax.swing.JFrame {
         saveCategory.setkHoverStartColor(new java.awt.Color(204, 204, 204));
         saveCategory.setkSelectedColor(new java.awt.Color(255, 102, 102));
         saveCategory.setkStartColor(new java.awt.Color(51, 102, 255));
+        saveCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveCategoryActionPerformed(evt);
+            }
+        });
         jPanel1.add(saveCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
 
         kButton2.setText("Cancel");
@@ -92,6 +100,23 @@ public class AddCategory extends javax.swing.JFrame {
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_kButton2ActionPerformed
+
+    private void saveCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCategoryActionPerformed
+        String category = this.categortyField.getText();
+
+        if (category.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Something went wrong");
+            return;
+        }
+
+        if (new CategoryController().insertCategory(new CategoryModel(category))) {
+            JOptionPane.showMessageDialog(this, "Category add success");
+            dispose();
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Category add failed");
+
+    }//GEN-LAST:event_saveCategoryActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

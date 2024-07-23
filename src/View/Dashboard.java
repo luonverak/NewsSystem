@@ -13,7 +13,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard(int id) {
         this.userId = id;
-        
         initComponents();
     }
 

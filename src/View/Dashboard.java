@@ -1,13 +1,14 @@
 package View;
 
+import Controller.CategoryController;
 import Popup.AddCategory;
+import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JFrame {
 
     private int userId;
 
     public Dashboard() {
-
         initComponents();
     }
 
@@ -15,6 +16,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.userId = id;
         initComponents();
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,9 +94,10 @@ public class Dashboard extends javax.swing.JFrame {
         categoryPanel.add(kButton1);
         kButton1.setBounds(1180, 70, 185, 45);
 
+        categoryTable.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 "No", "Category Title", "Action"
@@ -108,13 +111,16 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        categoryTable.setRowHeight(50);
+        categoryTable.getTableHeader().setResizingAllowed(false);
         jScrollPane1.setViewportView(categoryTable);
         if (categoryTable.getColumnModel().getColumnCount() > 0) {
-            categoryTable.getColumnModel().getColumn(0).setMinWidth(100);
-            categoryTable.getColumnModel().getColumn(0).setMaxWidth(100);
-            categoryTable.getColumnModel().getColumn(2).setMinWidth(300);
-            categoryTable.getColumnModel().getColumn(2).setPreferredWidth(300);
-            categoryTable.getColumnModel().getColumn(2).setMaxWidth(300);
+            categoryTable.getColumnModel().getColumn(0).setMinWidth(200);
+            categoryTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+            categoryTable.getColumnModel().getColumn(0).setMaxWidth(200);
+            categoryTable.getColumnModel().getColumn(2).setMinWidth(200);
+            categoryTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+            categoryTable.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
         categoryPanel.add(jScrollPane1);
@@ -237,6 +243,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
+        new CategoryController().getCategory(categoryTable);
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -260,7 +268,7 @@ public class Dashboard extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
- 
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Dashboard().setVisible(true);

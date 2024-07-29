@@ -2,12 +2,28 @@ package Popup;
 
 import Controller.CategoryController;
 import Model.CategoryModel;
+import View.Dashboard;
 import javax.swing.JOptionPane;
 
 public class AddCategory extends javax.swing.JFrame {
 
+    private int categoryId;
+    private String category;
+
     public AddCategory() {
         initComponents();
+    }
+
+    public AddCategory(int catId, String category) {
+        initComponents();
+        this.categoryId = catId;
+        this.category = category;
+
+        if (category != null) {
+            this.categoryLabel.setText("Edit category");
+            this.saveCategory.setText("Update");
+        }
+        this.categortyField.setText(category);
     }
 
     @SuppressWarnings("unchecked")
@@ -15,7 +31,7 @@ public class AddCategory extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        categoryLabel = new javax.swing.JLabel();
         categortyField = new javax.swing.JTextField();
         saveCategory = new com.k33ptoo.components.KButton();
         kButton2 = new com.k33ptoo.components.KButton();
@@ -33,10 +49,10 @@ public class AddCategory extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(32767, 32767));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create new category");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 72));
+        categoryLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        categoryLabel.setText("Create new category");
+        jPanel1.add(categoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 72));
 
         categortyField.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         categortyField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 4, 0, new java.awt.Color(51, 153, 255)));
@@ -109,6 +125,17 @@ public class AddCategory extends javax.swing.JFrame {
             return;
         }
 
+        if (this.category != null) {
+            if (new CategoryController().updateCategory(new CategoryModel(this.categoryId, category))) {
+                JOptionPane.showMessageDialog(this, "Category edit success");
+                
+                dispose();
+                new Dashboard();
+                return;
+            }
+            return;
+        }
+
         if (new CategoryController().insertCategory(new CategoryModel(category))) {
             JOptionPane.showMessageDialog(this, "Category add success");
             dispose();
@@ -121,7 +148,7 @@ public class AddCategory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField categortyField;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel categoryLabel;
     private javax.swing.JPanel jPanel1;
     private com.k33ptoo.components.KButton kButton2;
     private com.k33ptoo.components.KButton saveCategory;

@@ -100,11 +100,11 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No", "Category Title", "Action"
+                "No", "Category Title"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -113,14 +113,16 @@ public class Dashboard extends javax.swing.JFrame {
         });
         categoryTable.setRowHeight(50);
         categoryTable.getTableHeader().setResizingAllowed(false);
+        categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                categoryTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(categoryTable);
         if (categoryTable.getColumnModel().getColumnCount() > 0) {
             categoryTable.getColumnModel().getColumn(0).setMinWidth(200);
             categoryTable.getColumnModel().getColumn(0).setPreferredWidth(200);
             categoryTable.getColumnModel().getColumn(0).setMaxWidth(200);
-            categoryTable.getColumnModel().getColumn(2).setMinWidth(200);
-            categoryTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-            categoryTable.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
         categoryPanel.add(jScrollPane1);
@@ -158,7 +160,7 @@ public class Dashboard extends javax.swing.JFrame {
         categoryFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         categoryFeature.setForeground(new java.awt.Color(255, 255, 255));
         categoryFeature.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        categoryFeature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SwingGUI/images/search.png"))); // NOI18N
+        categoryFeature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         categoryFeature.setText("Category");
         categoryFeature.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         categoryFeature.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,7 +173,7 @@ public class Dashboard extends javax.swing.JFrame {
         newsFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         newsFeature.setForeground(new java.awt.Color(255, 255, 255));
         newsFeature.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        newsFeature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SwingGUI/images/news.png"))); // NOI18N
+        newsFeature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/news.png"))); // NOI18N
         newsFeature.setText("News");
         newsFeature.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         newsFeature.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +186,7 @@ public class Dashboard extends javax.swing.JFrame {
         logout.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         logout.setForeground(new java.awt.Color(255, 255, 255));
         logout.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SwingGUI/images/logout.png"))); // NOI18N
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         logout.setText("Logout");
         logout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         menusPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 190, -1));
@@ -192,7 +194,7 @@ public class Dashboard extends javax.swing.JFrame {
         logout1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         logout1.setForeground(new java.awt.Color(255, 255, 255));
         logout1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        logout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SwingGUI/images/user.png"))); // NOI18N
+        logout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
         logout1.setText("Profile");
         logout1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         logout1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -246,6 +248,16 @@ public class Dashboard extends javax.swing.JFrame {
         new CategoryController().getCategory(categoryTable);
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
+        DefaultTableModel tableModel = (DefaultTableModel)this.categoryTable.getModel();
+        int row = this.categoryTable.getSelectedRow();
+        
+        int catId = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+        String category = tableModel.getValueAt(row, 1).toString();
+        new AddCategory(catId,category).setVisible(true);
+       
+    }//GEN-LAST:event_categoryTableMouseClicked
 
     /**
      * @param args the command line arguments

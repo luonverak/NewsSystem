@@ -1,29 +1,32 @@
 package Popup;
 
 import Controller.CategoryController;
+import Controller.PositionController;
 import Model.CategoryModel;
+import Model.PositionModel;
 import View.Dashboard;
 import javax.swing.JOptionPane;
 
-public class AddCategory extends javax.swing.JFrame {
+public class AddPosition extends javax.swing.JFrame {
 
     private int categoryId;
     private String category;
+    private Dashboard dashboard=new Dashboard();
 
-    public AddCategory() {
+    public AddPosition() {
         initComponents();
     }
 
-    public AddCategory(int catId, String category) {
+    public AddPosition(int catId, String category) {
         initComponents();
         this.categoryId = catId;
         this.category = category;
 
         if (category != null) {
             this.categoryLabel.setText("Edit category");
-            this.saveCategory.setText("Update");
+            this.savePosition.setText("Update");
         }
-        this.categortyField.setText(category);
+        this.positionField.setText(category);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,8 +35,8 @@ public class AddCategory extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         categoryLabel = new javax.swing.JLabel();
-        categortyField = new javax.swing.JTextField();
-        saveCategory = new com.k33ptoo.components.KButton();
+        positionField = new javax.swing.JTextField();
+        savePosition = new com.k33ptoo.components.KButton();
         kButton2 = new com.k33ptoo.components.KButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,32 +54,32 @@ public class AddCategory extends javax.swing.JFrame {
 
         categoryLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        categoryLabel.setText("Create new category");
+        categoryLabel.setText("Create new position");
         jPanel1.add(categoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 72));
 
-        categortyField.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        categortyField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 4, 0, new java.awt.Color(51, 153, 255)));
-        categortyField.addActionListener(new java.awt.event.ActionListener() {
+        positionField.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        positionField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 4, 0, new java.awt.Color(51, 153, 255)));
+        positionField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categortyFieldActionPerformed(evt);
+                positionFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(categortyField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 570, 60));
+        jPanel1.add(positionField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 570, 60));
 
-        saveCategory.setText("Save");
-        saveCategory.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        saveCategory.setkBackGroundColor(new java.awt.Color(255, 51, 51));
-        saveCategory.setkEndColor(new java.awt.Color(51, 102, 255));
-        saveCategory.setkHoverEndColor(new java.awt.Color(51, 51, 255));
-        saveCategory.setkHoverStartColor(new java.awt.Color(204, 204, 204));
-        saveCategory.setkSelectedColor(new java.awt.Color(255, 102, 102));
-        saveCategory.setkStartColor(new java.awt.Color(51, 102, 255));
-        saveCategory.addActionListener(new java.awt.event.ActionListener() {
+        savePosition.setText("Save");
+        savePosition.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        savePosition.setkBackGroundColor(new java.awt.Color(255, 51, 51));
+        savePosition.setkEndColor(new java.awt.Color(51, 102, 255));
+        savePosition.setkHoverEndColor(new java.awt.Color(51, 51, 255));
+        savePosition.setkHoverStartColor(new java.awt.Color(204, 204, 204));
+        savePosition.setkSelectedColor(new java.awt.Color(255, 102, 102));
+        savePosition.setkStartColor(new java.awt.Color(51, 102, 255));
+        savePosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveCategoryActionPerformed(evt);
+                savePositionActionPerformed(evt);
             }
         });
-        jPanel1.add(saveCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
+        jPanel1.add(savePosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
 
         kButton2.setText("Cancel");
         kButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
@@ -109,48 +112,38 @@ public class AddCategory extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void categortyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categortyFieldActionPerformed
+    private void positionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categortyFieldActionPerformed
+    }//GEN-LAST:event_positionFieldActionPerformed
 
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_kButton2ActionPerformed
 
-    private void saveCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCategoryActionPerformed
-        String category = this.categortyField.getText();
+    private void savePositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePositionActionPerformed
+        String position = this.positionField.getText();
 
-        if (category.isEmpty()) {
+        if (position.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Something went wrong");
             return;
         }
 
-        if (this.category != null) {
-            if (new CategoryController().updateCategory(new CategoryModel(this.categoryId, category))) {
-                JOptionPane.showMessageDialog(this, "Category edit success");
-                
-                dispose();
-                new Dashboard();
-                return;
-            }
-            return;
-        }
 
-        if (new CategoryController().insertCategory(new CategoryModel(category))) {
-            JOptionPane.showMessageDialog(this, "Category add success");
+        if (new PositionController().insert(new PositionModel(position))) {
+            JOptionPane.showMessageDialog(this, "Position add success");
             dispose();
             return;
         }
-        JOptionPane.showMessageDialog(this, "Category add failed");
+        JOptionPane.showMessageDialog(this, "Position add failed");
 
-    }//GEN-LAST:event_saveCategoryActionPerformed
+    }//GEN-LAST:event_savePositionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField categortyField;
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JPanel jPanel1;
     private com.k33ptoo.components.KButton kButton2;
-    private com.k33ptoo.components.KButton saveCategory;
+    private javax.swing.JTextField positionField;
+    private com.k33ptoo.components.KButton savePosition;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ public class AddCategory extends javax.swing.JFrame {
 
     private int categoryId;
     private String category;
+    private Dashboard dashboard=new Dashboard();
 
     public AddCategory() {
         initComponents();
@@ -128,9 +129,8 @@ public class AddCategory extends javax.swing.JFrame {
         if (this.category != null) {
             if (new CategoryController().updateCategory(new CategoryModel(this.categoryId, category))) {
                 JOptionPane.showMessageDialog(this, "Category edit success");
-                
                 dispose();
-                new Dashboard();
+                
                 return;
             }
             return;

@@ -1,7 +1,11 @@
 package View;
 
 import Controller.CategoryController;
+import Controller.PositionController;
 import Popup.AddCategory;
+import Popup.AddNews;
+import Popup.AddPosition;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JFrame {
@@ -17,6 +21,9 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void click() {
+        JOptionPane.showMessageDialog(this, "Home");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,14 +38,25 @@ public class Dashboard extends javax.swing.JFrame {
         kButton1 = new com.k33ptoo.components.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         categoryTable = new javax.swing.JTable();
-        profilePanel = new javax.swing.JPanel();
         newsPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        kButton2 = new com.k33ptoo.components.KButton();
+        profilePanel = new javax.swing.JPanel();
+        positionPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        kButton3 = new com.k33ptoo.components.KButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        staffPosition = new javax.swing.JTable();
         menusPanel = new javax.swing.JPanel();
         dashboardTitle = new javax.swing.JLabel();
         categoryFeature = new javax.swing.JLabel();
         newsFeature = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
         logout1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        positionFeature = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1626, 868));
@@ -130,14 +148,100 @@ public class Dashboard extends javax.swing.JFrame {
 
         indexPanel.add(categoryPanel, "card3");
 
+        newsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        newsPanel.setMinimumSize(new java.awt.Dimension(200, 220));
+        newsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel3.setText("News Contents");
+        newsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 750, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Title", "Category", "Description", "Views", "Admin"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
+
+        newsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1390, 760));
+
+        kButton2.setText("Add");
+        kButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        kButton2.setkBackGroundColor(new java.awt.Color(255, 0, 51));
+        kButton2.setkEndColor(new java.awt.Color(0, 102, 255));
+        kButton2.setkHoverEndColor(new java.awt.Color(0, 0, 255));
+        kButton2.setkHoverForeGround(new java.awt.Color(255, 51, 51));
+        kButton2.setkHoverStartColor(new java.awt.Color(255, 51, 102));
+        kButton2.setkSelectedColor(new java.awt.Color(0, 51, 255));
+        kButton2.setkStartColor(new java.awt.Color(0, 0, 255));
+        kButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton2ActionPerformed(evt);
+            }
+        });
+        newsPanel.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 40, -1, -1));
+
+        indexPanel.add(newsPanel, "card5");
+
         profilePanel.setBackground(new java.awt.Color(0, 51, 204));
         profilePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         indexPanel.add(profilePanel, "card4");
 
-        newsPanel.setBackground(new java.awt.Color(255, 153, 102));
-        newsPanel.setMinimumSize(new java.awt.Dimension(200, 220));
-        newsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        indexPanel.add(newsPanel, "card5");
+        positionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        positionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel6.setText("Staff Position");
+        positionPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        kButton3.setText("Add");
+        kButton3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        kButton3.setkEndColor(new java.awt.Color(0, 102, 255));
+        kButton3.setkHoverEndColor(new java.awt.Color(51, 51, 255));
+        kButton3.setkStartColor(new java.awt.Color(0, 0, 255));
+        kButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton3ActionPerformed(evt);
+            }
+        });
+        positionPanel.add(kButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 40, -1, -1));
+
+        staffPosition.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        staffPosition.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Position"
+            }
+        ));
+        staffPosition.setRowHeight(40);
+        jScrollPane3.setViewportView(staffPosition);
+        if (staffPosition.getColumnModel().getColumnCount() > 0) {
+            staffPosition.getColumnModel().getColumn(0).setMinWidth(200);
+            staffPosition.getColumnModel().getColumn(0).setPreferredWidth(200);
+            staffPosition.getColumnModel().getColumn(0).setMaxWidth(200);
+        }
+
+        positionPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 1380, 700));
+
+        indexPanel.add(positionPanel, "card6");
 
         getContentPane().add(indexPanel);
         indexPanel.setBounds(210, 0, 1420, 870);
@@ -202,7 +306,24 @@ public class Dashboard extends javax.swing.JFrame {
                 logout1MouseClicked(evt);
             }
         });
-        menusPanel.add(logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, -1));
+        menusPanel.add(logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 190, -1));
+
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management.png"))); // NOI18N
+        jLabel4.setText("Staff");
+        menusPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 190, -1));
+
+        positionFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        positionFeature.setForeground(new java.awt.Color(255, 255, 255));
+        positionFeature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/job.png"))); // NOI18N
+        positionFeature.setText("Position");
+        positionFeature.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                positionFeatureMouseClicked(evt);
+            }
+        });
+        menusPanel.add(positionFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, -1));
 
         getContentPane().add(menusPanel);
         menusPanel.setBounds(0, 0, 210, 870);
@@ -216,6 +337,7 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(categoryPanel);
         indexPanel.repaint();
         indexPanel.revalidate();
+        new CategoryController().getCategory(categoryTable);
     }//GEN-LAST:event_categoryFeatureMouseClicked
 
     private void newsFeatureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newsFeatureMouseClicked
@@ -244,24 +366,35 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_kButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        new CategoryController().getCategory(categoryTable);
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
-        DefaultTableModel tableModel = (DefaultTableModel)this.categoryTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) this.categoryTable.getModel();
         int row = this.categoryTable.getSelectedRow();
-        
+
         int catId = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
         String category = tableModel.getValueAt(row, 1).toString();
-        new AddCategory(catId,category).setVisible(true);
-       
+        new AddCategory(catId, category).setVisible(true);
+
     }//GEN-LAST:event_categoryTableMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
+        new AddNews().setVisible(true);
+    }//GEN-LAST:event_kButton2ActionPerformed
+
+    private void positionFeatureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_positionFeatureMouseClicked
+        indexPanel.removeAll();
+        indexPanel.add(positionPanel);
+        indexPanel.repaint();
+        indexPanel.revalidate();
+        new PositionController().getPosition(this.staffPosition);
+    }//GEN-LAST:event_positionFeatureMouseClicked
+
+    private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
+        new AddPosition().setVisible(true);
+    }//GEN-LAST:event_kButton3ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -297,14 +430,25 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel indexPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private com.k33ptoo.components.KButton kButton1;
+    private com.k33ptoo.components.KButton kButton2;
+    private com.k33ptoo.components.KButton kButton3;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel logout1;
     private javax.swing.JPanel menusPanel;
     private javax.swing.JLabel newsFeature;
     private javax.swing.JPanel newsPanel;
+    private javax.swing.JLabel positionFeature;
+    private javax.swing.JPanel positionPanel;
     private javax.swing.JPanel profilePanel;
+    private javax.swing.JTable staffPosition;
     // End of variables declaration//GEN-END:variables
 }

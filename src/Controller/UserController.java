@@ -12,9 +12,7 @@ public class UserController {
     private MySqlConnection connection = new MySqlConnection();
     public List<String> listUsername = new ArrayList<>();
 
-    public UserController() {
-    }
-
+  
     public void getUsername() {
         String sqlScript = "SELECT username FROM user";
         try {

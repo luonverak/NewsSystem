@@ -5,6 +5,7 @@ import Controller.PositionController;
 import Popup.AddCategory;
 import Popup.AddNews;
 import Popup.AddPosition;
+import Popup.AddStaff;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,6 +50,11 @@ public class Dashboard extends javax.swing.JFrame {
         kButton3 = new com.k33ptoo.components.KButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         staffPosition = new javax.swing.JTable();
+        addStaff = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        kButton4 = new com.k33ptoo.components.KButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         menusPanel = new javax.swing.JPanel();
         dashboardTitle = new javax.swing.JLabel();
         categoryFeature = new javax.swing.JLabel();
@@ -243,6 +249,57 @@ public class Dashboard extends javax.swing.JFrame {
 
         indexPanel.add(positionPanel, "card6");
 
+        addStaff.setBackground(new java.awt.Color(255, 255, 255));
+        addStaff.setLayout(null);
+
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel5.setText("Staff Information");
+        addStaff.add(jLabel5);
+        jLabel5.setBounds(10, 10, 320, 60);
+
+        kButton4.setText("Add");
+        kButton4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        kButton4.setkEndColor(new java.awt.Color(51, 51, 255));
+        kButton4.setkHoverEndColor(new java.awt.Color(51, 51, 255));
+        kButton4.setkStartColor(new java.awt.Color(0, 51, 255));
+        kButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton4ActionPerformed(evt);
+            }
+        });
+        addStaff.add(kButton4);
+        kButton4.setBounds(1210, 40, 185, 45);
+
+        jTable2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Fullname", "Gender", "Email", "Phone", "Role"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setRowHeight(40);
+        jScrollPane4.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(200);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(200);
+        }
+
+        addStaff.add(jScrollPane4);
+        jScrollPane4.setBounds(10, 100, 1390, 760);
+
+        indexPanel.add(addStaff, "card7");
+
         getContentPane().add(indexPanel);
         indexPanel.setBounds(210, 0, 1420, 870);
 
@@ -312,6 +369,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management.png"))); // NOI18N
         jLabel4.setText("Staff");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         menusPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 190, -1));
 
         positionFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
@@ -395,6 +457,17 @@ public class Dashboard extends javax.swing.JFrame {
         new AddPosition().setVisible(true);
     }//GEN-LAST:event_kButton3ActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        indexPanel.removeAll();
+        indexPanel.add(addStaff);
+        indexPanel.repaint();
+        indexPanel.revalidate();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void kButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton4ActionPerformed
+         new AddStaff().setVisible(true);
+    }//GEN-LAST:event_kButton4ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -422,6 +495,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addStaff;
     private javax.swing.JLabel categoryFeature;
     private javax.swing.JPanel categoryPanel;
     private javax.swing.JTable categoryTable;
@@ -432,15 +506,19 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private com.k33ptoo.components.KButton kButton1;
     private com.k33ptoo.components.KButton kButton2;
     private com.k33ptoo.components.KButton kButton3;
+    private com.k33ptoo.components.KButton kButton4;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel logout1;
     private javax.swing.JPanel menusPanel;

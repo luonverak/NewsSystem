@@ -34,28 +34,30 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SwingGUI/images/images-label.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 440, 410));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/v.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 460, 410));
 
         jPanel2.setBackground(new java.awt.Color(231, 231, 231));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 32)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome to T-News");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 540, -1));
+        jLabel1.setText("Welcome to ​​អ្នកអាយធីNeak-IT");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 50));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 51, 153));
         jLabel3.setText("Username");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         username.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 470, 60));
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 470, 60));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 51, 153));
         jLabel4.setText("Password");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         password.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         password.addActionListener(new java.awt.event.ActionListener() {
@@ -63,9 +65,9 @@ public class Login extends javax.swing.JFrame {
                 passwordActionPerformed(evt);
             }
         });
-        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 470, 60));
+        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 470, 60));
 
-        login.setBackground(new java.awt.Color(0, 102, 255));
+        login.setBackground(new java.awt.Color(0, 51, 153));
         login.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Login");

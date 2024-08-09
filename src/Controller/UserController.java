@@ -11,6 +11,7 @@ public class UserController {
     private Compoments compoments = new Compoments();
     private MySqlConnection connection = new MySqlConnection();
     public List<String> listUsername = new ArrayList<>();
+    public List<UserModel> listUser = new ArrayList<>();
 
   
     public void getUsername() {
@@ -71,4 +72,32 @@ public class UserController {
         }
         return false;
     }
+    
+    public void getUser(int userId){
+        try {
+            String sqlScript = "SELECT * FROM user WHERE id="+userId+"";
+            connection.ps = connection.connection().prepareStatement(sqlScript);
+            connection.rs = connection.ps.executeQuery();
+            while(connection.rs.next()){
+                
+                listUser.add(new UserModel(
+                                connection.rs.getInt("id"), 
+                                connection.rs.getString("first_name"),
+                                connection.rs.getString("last_name"), 
+                                connection.rs.getString("gender"), 
+                                connection.rs.getString("dob"),
+                                connection.rs.getString("username"),
+                                connection.rs.getString("password"), 
+                                connection.rs.getString("email"), 
+                                connection.rs.getString("phone_number"), 
+                                connection.rs.getString("position"), 
+                                connection.rs.getFloat("salary"),
+                                connection.rs.getString("role"), 
+                                connection.rs.getString("profile"))
+                );
+            }
+        } catch (Exception e) {
+        }
+    }
+    
 }

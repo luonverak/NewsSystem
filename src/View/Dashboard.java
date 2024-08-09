@@ -2,17 +2,20 @@ package View;
 
 import Controller.CategoryController;
 import Controller.PositionController;
+import Controller.UserController;
 import Popup.AddCategory;
 import Popup.AddNews;
 import Popup.AddPosition;
 import Popup.AddStaff;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JFrame {
 
     private int userId;
-
+    private UserController userController = new UserController();
+    
     public Dashboard() {
         initComponents();
     }
@@ -22,6 +25,8 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
     }
 
+     
+    
     public void click() {
         JOptionPane.showMessageDialog(this, "Home");
     }
@@ -45,6 +50,29 @@ public class Dashboard extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         kButton2 = new com.k33ptoo.components.KButton();
         profilePanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        fullname = new javax.swing.JLabel();
+        female = new javax.swing.JRadioButton();
+        male = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
+        dob = new com.toedter.calendar.JDateChooser();
+        jLabel13 = new javax.swing.JLabel();
+        phone = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        password = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        positions = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        salary = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         positionPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         kButton3 = new com.k33ptoo.components.KButton();
@@ -205,8 +233,112 @@ public class Dashboard extends javax.swing.JFrame {
 
         indexPanel.add(newsPanel, "card5");
 
-        profilePanel.setBackground(new java.awt.Color(0, 51, 204));
-        profilePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        profilePanel.setBackground(new java.awt.Color(255, 255, 255));
+        profilePanel.setLayout(null);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 170, 170));
+
+        fullname.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        fullname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fullname.setText("Luon Verak");
+        jPanel2.add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, 150, 30));
+
+        female.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        female.setText("Female");
+        female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleActionPerformed(evt);
+            }
+        });
+        jPanel2.add(female, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+
+        male.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        male.setText("Male");
+        male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maleActionPerformed(evt);
+            }
+        });
+        jPanel2.add(male, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel12.setText("Date of Birth");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 150, 30));
+
+        dob.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, 370, 52));
+
+        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel13.setText("Phone number");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 180, 30));
+
+        phone.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 370, 50));
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel7.setText("Email");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 150, 30));
+
+        email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 372, 50));
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel14.setText("Username");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 150, 30));
+
+        username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 570, 370, 50));
+
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel15.setText("Password");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 540, 150, 30));
+
+        password.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 570, 372, 50));
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel16.setText("Position");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, 150, 30));
+
+        positions.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(positions, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 670, 370, 50));
+
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel17.setText("Salary");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 640, 150, 30));
+
+        salary.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel2.add(salary, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 670, 372, 50));
+
+        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel3.setLayout(null);
+
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("User Informations");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(10, 0, 206, 60);
+
+        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-text.png"))); // NOI18N
+        jButton1.setText("Edit");
+        jPanel3.add(jButton1);
+        jButton1.setBounds(1010, 10, 100, 40);
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 1120, 60));
+
+        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel11.setText("Gender");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 150, 30));
+
+        profilePanel.add(jPanel2);
+        jPanel2.setBounds(0, 0, 1420, 870);
+
         indexPanel.add(profilePanel, "card4");
 
         positionPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -316,7 +448,7 @@ public class Dashboard extends javax.swing.JFrame {
                 dashboardTitleMouseClicked(evt);
             }
         });
-        menusPanel.add(dashboardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 210, -1));
+        menusPanel.add(dashboardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
         categoryFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         categoryFeature.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,7 +461,7 @@ public class Dashboard extends javax.swing.JFrame {
                 categoryFeatureMouseClicked(evt);
             }
         });
-        menusPanel.add(categoryFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 190, -1));
+        menusPanel.add(categoryFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, -1));
 
         newsFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         newsFeature.setForeground(new java.awt.Color(255, 255, 255));
@@ -342,7 +474,7 @@ public class Dashboard extends javax.swing.JFrame {
                 newsFeatureMouseClicked(evt);
             }
         });
-        menusPanel.add(newsFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 190, -1));
+        menusPanel.add(newsFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 180, -1));
 
         logout.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         logout.setForeground(new java.awt.Color(255, 255, 255));
@@ -350,7 +482,7 @@ public class Dashboard extends javax.swing.JFrame {
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         logout.setText("Logout");
         logout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        menusPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 190, -1));
+        menusPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 810, 180, -1));
 
         logout1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         logout1.setForeground(new java.awt.Color(255, 255, 255));
@@ -363,7 +495,7 @@ public class Dashboard extends javax.swing.JFrame {
                 logout1MouseClicked(evt);
             }
         });
-        menusPanel.add(logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 190, -1));
+        menusPanel.add(logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 180, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -374,7 +506,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        menusPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 190, -1));
+        menusPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 180, -1));
 
         positionFeature.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         positionFeature.setForeground(new java.awt.Color(255, 255, 255));
@@ -385,7 +517,7 @@ public class Dashboard extends javax.swing.JFrame {
                 positionFeatureMouseClicked(evt);
             }
         });
-        menusPanel.add(positionFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, -1));
+        menusPanel.add(positionFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 180, -1));
 
         getContentPane().add(menusPanel);
         menusPanel.setBounds(0, 0, 210, 870);
@@ -414,6 +546,28 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(profilePanel);
         indexPanel.repaint();
         indexPanel.revalidate();
+        userController.getUser(userId);
+        
+        userController.listUser.forEach(e->{
+        
+            this.fullname.setText(e.getLastName()+e.getFirstName());
+            this.phone.setText(e.getPhone());
+            this.salary.setText(String.valueOf(e.getSalary()));
+            this.positions.setText(e.getPosition());
+            this.username.setText(e.getUsername());
+            this.email.setText(e.getEmail());
+            this.password.setText(e.getPassword());
+//            this.dob.
+            
+            if(e.getGender().equalsIgnoreCase("Male")){
+                this.male.setSelected(true);
+                return;
+            }else{
+                this.female.setSelected(true);
+                return;
+            }
+        });
+        
     }//GEN-LAST:event_logout1MouseClicked
 
     private void dashboardTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardTitleMouseClicked
@@ -468,31 +622,39 @@ public class Dashboard extends javax.swing.JFrame {
          new AddStaff().setVisible(true);
     }//GEN-LAST:event_kButton4ActionPerformed
 
-    public static void main(String args[]) {
+    private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_femaleActionPerformed
 
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
-            }
-        });
-    }
+    private void maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maleActionPerformed
+//
+//    public static void main(String args[]) {
+//
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Dashboard().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addStaff;
@@ -500,15 +662,32 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel categoryPanel;
     private javax.swing.JTable categoryTable;
     private javax.swing.JLabel dashboardTitle;
+    private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JTextField email;
+    private javax.swing.JRadioButton female;
+    private javax.swing.JLabel fullname;
     private javax.swing.JPanel homePanel;
     private javax.swing.JPanel indexPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -521,12 +700,18 @@ public class Dashboard extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton kButton4;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel logout1;
+    private javax.swing.JRadioButton male;
     private javax.swing.JPanel menusPanel;
     private javax.swing.JLabel newsFeature;
     private javax.swing.JPanel newsPanel;
+    private javax.swing.JTextField password;
+    private javax.swing.JTextField phone;
     private javax.swing.JLabel positionFeature;
     private javax.swing.JPanel positionPanel;
+    private javax.swing.JTextField positions;
     private javax.swing.JPanel profilePanel;
+    private javax.swing.JTextField salary;
     private javax.swing.JTable staffPosition;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

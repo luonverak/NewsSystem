@@ -26,8 +26,6 @@ public class UserModel {
     private String role;
     private String profile;
 
-   
-
     public UserModel(int id, String firstName, String lastName, String gender, String dob, String username, String password, String email, String phone, String position, float salary, String role, String profile) {
         this.id = id;
         this.firstName = firstName;
@@ -43,11 +41,6 @@ public class UserModel {
         this.role = role;
         this.profile = profile;
     }
-
-
-  
-    
-    
 
     public UserModel(String firstName, String lastName, String gender, String dob, String username, String password) {
         this.firstName = firstName;
@@ -67,7 +60,6 @@ public class UserModel {
     public String toString() {
         return "UserModel{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", username=" + username + ", password=" + password + ", email=" + email + ", phone=" + phone + ", position=" + position + ", salary=" + salary + ", role=" + role + ", profile=" + profile + '}';
     }
-    
     
    public static List<Integer> listId = new ArrayList<>();
 

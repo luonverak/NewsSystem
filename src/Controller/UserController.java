@@ -55,12 +55,9 @@ public class UserController {
         String sqlScript = "SELECT id FROM user WHERE (username=? AND password=?);";
         try {
             connection.ps = connection.connection().prepareStatement(sqlScript);
-
             connection.ps.setString(1, userModel.getUsername());
             connection.ps.setString(2, this.compoments.encryptPassword(userModel.getPassword()));
-
-            connection.rs = connection.ps.executeQuery();
-
+            connection.rs = connection.ps.executeQuery(); 
             if (connection.rs.next()) {
                 UserModel.listId.clear();
                 UserModel.listId.add(connection.rs.getInt("id"));

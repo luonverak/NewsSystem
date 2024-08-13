@@ -7,7 +7,11 @@ import Popup.AddCategory;
 import Popup.AddNews;
 import Popup.AddPosition;
 import Popup.AddStaff;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +19,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private int userId;
     private UserController userController = new UserController();
-    
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
+
     public Dashboard() {
         initComponents();
     }
@@ -25,8 +30,6 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
     }
 
-     
-    
     public void click() {
         JOptionPane.showMessageDialog(this, "Home");
     }
@@ -88,7 +91,7 @@ public class Dashboard extends javax.swing.JFrame {
         categoryFeature = new javax.swing.JLabel();
         newsFeature = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        logout1 = new javax.swing.JLabel();
+        profile = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         positionFeature = new javax.swing.JLabel();
 
@@ -484,18 +487,21 @@ public class Dashboard extends javax.swing.JFrame {
         logout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         menusPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 810, 180, -1));
 
-        logout1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        logout1.setForeground(new java.awt.Color(255, 255, 255));
-        logout1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        logout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        logout1.setText("Profile");
-        logout1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        logout1.addMouseListener(new java.awt.event.MouseAdapter() {
+        profile.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        profile.setForeground(new java.awt.Color(255, 255, 255));
+        profile.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        profile.setText("Profile");
+        profile.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        profile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logout1MouseClicked(evt);
+                profileMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                profileMouseEntered(evt);
             }
         });
-        menusPanel.add(logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 180, -1));
+        menusPanel.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 180, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -541,34 +547,33 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.revalidate();
     }//GEN-LAST:event_newsFeatureMouseClicked
 
-    private void logout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout1MouseClicked
+    private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
         indexPanel.removeAll();
         indexPanel.add(profilePanel);
         indexPanel.repaint();
         indexPanel.revalidate();
         userController.getUser(userId);
-        
-        userController.listUser.forEach(e->{
-        
-            this.fullname.setText(e.getLastName()+e.getFirstName());
+
+        userController.listUser.forEach(e -> {
+           
+            this.fullname.setText(e.getLastName() + e.getFirstName());
             this.phone.setText(e.getPhone());
             this.salary.setText(String.valueOf(e.getSalary()));
             this.positions.setText(e.getPosition());
             this.username.setText(e.getUsername());
             this.email.setText(e.getEmail());
             this.password.setText(e.getPassword());
-//            this.dob.
-            
-            if(e.getGender().equalsIgnoreCase("Male")){
+            if (e.getGender().equalsIgnoreCase("Male")) {
                 this.male.setSelected(true);
                 return;
-            }else{
+            } else {
                 this.female.setSelected(true);
                 return;
             }
+
         });
-        
-    }//GEN-LAST:event_logout1MouseClicked
+
+    }//GEN-LAST:event_profileMouseClicked
 
     private void dashboardTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardTitleMouseClicked
         indexPanel.removeAll();
@@ -619,7 +624,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void kButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton4ActionPerformed
-         new AddStaff().setVisible(true);
+        new AddStaff().setVisible(true);
     }//GEN-LAST:event_kButton4ActionPerformed
 
     private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
@@ -629,32 +634,36 @@ public class Dashboard extends javax.swing.JFrame {
     private void maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_maleActionPerformed
-//
-//    public static void main(String args[]) {
-//
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Dashboard().setVisible(true);
-//            }
-//        });
-//    }
+
+    private void profileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_profileMouseEntered
+
+    public static void main(String args[]) {
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Dashboard().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addStaff;
@@ -699,7 +708,6 @@ public class Dashboard extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton kButton3;
     private com.k33ptoo.components.KButton kButton4;
     private javax.swing.JLabel logout;
-    private javax.swing.JLabel logout1;
     private javax.swing.JRadioButton male;
     private javax.swing.JPanel menusPanel;
     private javax.swing.JLabel newsFeature;
@@ -709,6 +717,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel positionFeature;
     private javax.swing.JPanel positionPanel;
     private javax.swing.JTextField positions;
+    private javax.swing.JLabel profile;
     private javax.swing.JPanel profilePanel;
     private javax.swing.JTextField salary;
     private javax.swing.JTable staffPosition;

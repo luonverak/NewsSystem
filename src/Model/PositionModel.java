@@ -10,6 +10,8 @@ import lombok.Setter;
 
 public class PositionModel {
 
+   
+
     private int id;
     private String position;
 
@@ -21,5 +23,8 @@ public class PositionModel {
         this.id = id;
         this.position = position;
     }
-    
+     @Override
+    public String toString() {
+        return "PositionModel{" + "id=" + id + ", position=" + position + '}';
+    }
 }

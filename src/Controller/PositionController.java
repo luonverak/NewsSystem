@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class PositionController {
 
     private MySqlConnection connection = new MySqlConnection();
-    public List<PositionModel> positionModels = new ArrayList<>();
+    public List<PositionModel> listPosition = new ArrayList<PositionModel>();
 
     public boolean insert(PositionModel positionModel) {
         try {
@@ -40,10 +40,26 @@ public class PositionController {
                     connection.rs.getString("position")
                 };
                 tableModel.addRow(object);
+                listPosition.add(new PositionModel(connection.rs.getInt("id"),  connection.rs.getString("position")));
             }
-            
             
         } catch (Exception e) {
         }
     }
+    
+    public void getPosition() {
+        try {
+           
+            String sqlScript = "SELECT * FROM tbl_position";
+            connection.ps = connection.connection().prepareStatement(sqlScript);
+            connection.rs = connection.ps.executeQuery();
+            while (connection.rs.next()) {
+              
+                listPosition.add(new PositionModel(connection.rs.getInt("id"),  connection.rs.getString("position")));
+            }
+            
+        } catch (Exception e) {
+        }
+    }
+    
 }

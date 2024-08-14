@@ -29,7 +29,7 @@ public class UserController {
 
     public boolean createAccount(UserModel userModel) {
 
-        String sqlScript = "INSERT INTO user (ficon.rst_name,last_name,gender,dob,username,password) VALUES(?,?,?,?,?,?)";
+        String sqlScript = "INSERT INTO user (first_name,last_name,gender,dob,username,password) VALUES(?,?,?,?,?,?)";
         try {
             connection.ps = connection.connection().prepareStatement(sqlScript);
             connection.ps.setString(1, userModel.getFirstName());
@@ -95,6 +95,34 @@ public class UserController {
             }
         } catch (Exception e) {
         }
+    }
+    
+    public boolean addStaff(UserModel userModel){
+        String sqlScript = "INSERT INTO user (first_name,last_name,gender,dob,username,password,email,phone_number,position,salary,role,profile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            connection.ps = connection.connection().prepareStatement(sqlScript);
+            connection.ps.setString(1, userModel.getFirstName());
+            connection.ps.setString(2, userModel.getLastName());
+            connection.ps.setString(3, userModel.getGender());
+            connection.ps.setString(4, userModel.getDob());
+            connection.ps.setString(5, userModel.getUsername());
+            connection.ps.setString(6, userModel.getPassword());
+            connection.ps.setString(7,userModel.getEmail());            
+            connection.ps.setString(8,userModel.getPhone());
+            connection.ps.setString(9,userModel.getPosition());
+            connection.ps.setDouble(10,userModel.getSalary());            
+            connection.ps.setString(11,userModel.getRole());
+            connection.ps.setString(12,userModel.getProfile());
+
+            if (connection.ps.executeUpdate() > 0) {
+                getUsername();
+                return true;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
     }
     
 }

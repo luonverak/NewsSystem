@@ -96,7 +96,10 @@ public class Dashboard extends javax.swing.JFrame {
         positionFeature = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusable(false);
+        setFocusableWindowState(false);
         setMinimumSize(new java.awt.Dimension(1626, 868));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -528,7 +531,7 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(menusPanel);
         menusPanel.setBounds(0, 0, 210, 870);
 
-        setSize(new java.awt.Dimension(1627, 896));
+        setSize(new java.awt.Dimension(1627, 868));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

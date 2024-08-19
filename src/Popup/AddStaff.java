@@ -1,20 +1,18 @@
 package Popup;
 
+import Components.ChooseFile;
 import Controller.PositionController;
+import Controller.UserController;
 import Model.UserModel;
-import java.awt.Image;
-import java.io.File;
 import java.text.SimpleDateFormat;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class AddStaff extends javax.swing.JFrame {
-    
+
     private PositionController positionController = new PositionController();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
-    private  String fileName;
-    
+    private String fileName;
+
     public AddStaff() {
         initComponents();
         positionController.getPosition();
@@ -22,7 +20,7 @@ public class AddStaff extends javax.swing.JFrame {
             this.positiionCombo.addItem(e.getPosition());
         });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +215,7 @@ public class AddStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_kButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
+
     }//GEN-LAST:event_formWindowOpened
 
     private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
@@ -226,7 +224,7 @@ public class AddStaff extends javax.swing.JFrame {
             String lastName = this.lastName.getText();
             String dob = sdf.format(this.dob.getDate());
             String username = this.username.getText();
-            String password =this.password.getText();
+            String password = this.password.getText();
             String gender = "";
             var groupGender = this.staffGender.getSelection();
             if (groupGender == null) {
@@ -237,48 +235,31 @@ public class AddStaff extends javax.swing.JFrame {
             }
             String email = this.email.getText();
             String phone = this.phone.getText();
-            double salary = Double.parseDouble(this.salary.getText());
+            float salary = Float.parseFloat(this.salary.getText());
             String position = this.positiionCombo.getSelectedItem().toString();
 
-            
-            
             if (!firstName.isEmpty() && !lastName.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
-
-                
-
+                if (new UserController().addStaff(new UserModel(firstName, lastName, gender, dob, username, password, email, phone, salary, position, fileName))) {
+                    JOptionPane.showMessageDialog(this, "Success");
+                    return;
+                }
             }
 
-            JOptionPane.showMessageDialog(rootPane, "Something went wrong");
+            JOptionPane.showMessageDialog(this, "Something went wrong");
 
         } catch (Exception e) {
 
             if (e.getMessage().equalsIgnoreCase("date must not be null")) {
-                JOptionPane.showMessageDialog(rootPane, "Something went wrong");
+                JOptionPane.showMessageDialog(this, "Something went wrong");
                 return;
             }
         }
     }//GEN-LAST:event_kButton1ActionPerformed
 
     private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
-           
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
-            fileName = f.getAbsolutePath();
-            Image getAbsolutePath=null;
-            ImageIcon icon = new ImageIcon(fileName);
-            Image image = icon.getImage().getScaledInstance(profile.getWidth(), profile.getHeight(), Image.SCALE_SMOOTH);
-            profile.setIcon(icon);
-            int desiredWidth = 300;
-            int desiredHeight = 200;       
-            ImageIcon imageIcon = new ImageIcon(fileName);
-            Image originalImage = imageIcon.getImage();
-            Image scaledImage = originalImage.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_REPLICATE);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
-            profile.setIcon(scaledIcon);
-            
-            
-            
+
+       fileName = new ChooseFile().chooseFile(this.profile);
+
     }//GEN-LAST:event_profileMouseClicked
 
 

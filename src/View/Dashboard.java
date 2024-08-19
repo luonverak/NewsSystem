@@ -7,12 +7,7 @@ import Popup.AddCategory;
 import Popup.AddNews;
 import Popup.AddPosition;
 import Popup.AddStaff;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JFrame {
@@ -20,7 +15,7 @@ public class Dashboard extends javax.swing.JFrame {
     private int userId;
     private UserController userController = new UserController();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
-
+    
     public Dashboard() {
         initComponents();
     }
@@ -30,9 +25,7 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void click() {
-        JOptionPane.showMessageDialog(this, "Home");
-    }
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -559,10 +552,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         userController.listUser.forEach(e -> {
            
-            this.fullname.setText(e.getLastName() + e.getFirstName());
+            this.fullname.setText(e.getLastName() +"\t"+ e.getFirstName());
             this.phone.setText(e.getPhone());
             this.salary.setText(String.valueOf(e.getSalary()));
-            this.positions.setText(e.getPosition());
+            this.positions.setText(e.getRole());
             this.username.setText(e.getUsername());
             this.email.setText(e.getEmail());
             this.password.setText(e.getPassword());

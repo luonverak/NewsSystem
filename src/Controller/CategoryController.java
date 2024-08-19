@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class CategoryController {
 
     private MySqlConnection connection = new MySqlConnection();
-    public List<CategoryModel> listCategory = new ArrayList<>();
+    public List<CategoryModel> listCategory = new ArrayList<CategoryModel>();
 
     public CategoryController() {
 
@@ -73,5 +73,17 @@ public class CategoryController {
             System.err.println(e.getMessage());
         }
         return false;
+    }
+
+    public void getCategory() {
+        try {
+            String sqlScript = "SELECT * FROM category";
+            connection.ps = connection.connection().prepareStatement(sqlScript);
+            connection.rs = connection.ps.executeQuery();
+            while (connection.rs.next()) {
+                listCategory.add(new CategoryModel(connection.rs.getInt("id"), connection.rs.getString("category_title")));
+            }
+        } catch (Exception e) {
+        }
     }
 }

@@ -1,6 +1,7 @@
 package View;
 
 import Controller.CategoryController;
+import Controller.NewsController;
 import Controller.PositionController;
 import Controller.UserController;
 import Popup.AddCategory;
@@ -8,24 +9,37 @@ import Popup.AddNews;
 import Popup.AddPosition;
 import Popup.AddStaff;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JFrame {
 
     private int userId;
     private UserController userController = new UserController();
+    private NewsController newsController = new NewsController();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
-    
+
     public Dashboard() {
         initComponents();
     }
 
     public Dashboard(int id) {
         this.userId = id;
+        userController.getUser(userId);
+
         initComponents();
     }
 
- 
+    private void userPermission(JPanel panel) {
+        userController.listUser.forEach(e -> {
+            if (!e.getRole().equalsIgnoreCase("Admin")) {
+                panel.removeAll();
+                JOptionPane.showMessageDialog(this, "You are don't have permission!");
+                return;
+            }
+        });
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,7 +57,7 @@ public class Dashboard extends javax.swing.JFrame {
         newsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        newsTable = new javax.swing.JTable();
         kButton2 = new com.k33ptoo.components.KButton();
         profilePanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -189,7 +203,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setText("News Contents");
         newsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 750, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        newsTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        newsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -205,11 +220,12 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+        newsTable.setRowHeight(40);
+        jScrollPane2.setViewportView(newsTable);
+        if (newsTable.getColumnModel().getColumnCount() > 0) {
+            newsTable.getColumnModel().getColumn(0).setMinWidth(100);
+            newsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            newsTable.getColumnModel().getColumn(0).setMaxWidth(100);
         }
 
         newsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1390, 760));
@@ -481,6 +497,11 @@ public class Dashboard extends javax.swing.JFrame {
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         logout.setText("Logout");
         logout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
         menusPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 810, 180, -1));
 
         profile.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
@@ -533,6 +554,7 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(categoryPanel);
         indexPanel.repaint();
         indexPanel.revalidate();
+        userPermission(this.categoryPanel);
         new CategoryController().getCategory(categoryTable);
     }//GEN-LAST:event_categoryFeatureMouseClicked
 
@@ -541,6 +563,23 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(newsPanel);
         indexPanel.repaint();
         indexPanel.revalidate();
+
+        DefaultTableModel model = (DefaultTableModel) newsTable.getModel();
+        model.setRowCount(0);
+        newsController.getNews(userId);
+        newsController.listNews.forEach(e -> {
+            Object object[] = {
+                e.getId(),
+                e.getTitle(),
+                e.getCategory(),
+                e.getDescription(),
+                0,
+                e.getUser()
+            };
+            model.addRow(object);
+        });
+
+
     }//GEN-LAST:event_newsFeatureMouseClicked
 
     private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
@@ -548,11 +587,9 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(profilePanel);
         indexPanel.repaint();
         indexPanel.revalidate();
-        userController.getUser(userId);
 
         userController.listUser.forEach(e -> {
-           
-            this.fullname.setText(e.getLastName() +"\t"+ e.getFirstName());
+            this.fullname.setText(e.getLastName() + "\t" + e.getFirstName());
             this.phone.setText(e.getPhone());
             this.salary.setText(String.valueOf(e.getSalary()));
             this.positions.setText(e.getRole());
@@ -601,10 +638,12 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_kButton2ActionPerformed
 
     private void positionFeatureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_positionFeatureMouseClicked
+
         indexPanel.removeAll();
         indexPanel.add(positionPanel);
         indexPanel.repaint();
         indexPanel.revalidate();
+        userPermission(this.positionPanel);
         new PositionController().getPosition(this.staffPosition);
     }//GEN-LAST:event_positionFeatureMouseClicked
 
@@ -617,6 +656,7 @@ public class Dashboard extends javax.swing.JFrame {
         indexPanel.add(addStaff);
         indexPanel.repaint();
         indexPanel.revalidate();
+        userPermission(this.addStaff);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void kButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton4ActionPerformed
@@ -634,6 +674,11 @@ public class Dashboard extends javax.swing.JFrame {
     private void profileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_profileMouseEntered
+
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        new Login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutMouseClicked
 
     public static void main(String args[]) {
 
@@ -697,7 +742,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private com.k33ptoo.components.KButton kButton1;
     private com.k33ptoo.components.KButton kButton2;
@@ -708,6 +752,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel menusPanel;
     private javax.swing.JLabel newsFeature;
     private javax.swing.JPanel newsPanel;
+    private javax.swing.JTable newsTable;
     private javax.swing.JTextField password;
     private javax.swing.JTextField phone;
     private javax.swing.JLabel positionFeature;
